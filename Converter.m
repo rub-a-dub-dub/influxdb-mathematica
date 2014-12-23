@@ -1,5 +1,3 @@
-(* ::Package:: *)
-
 Clear[InfluxDB`ImportInfluxDB];
 InfluxDB`ImportInfluxDB[filename_String,options___]:=Module[
 {serverName,serverPort,userName,userPwd,databaseName,url,reps,raw},
@@ -10,4 +8,3 @@ url="http://"<>reps[[1]]<>":"<>ToString[reps[[2]]]<>"/db/"<>reps[[5]]<>"/series?
 raw=Import[url,"JSON"];
 TimeSeries[{#[[1]]/1000.+AbsoluteTime[{1969,12,31,16,0,0}],#[[3]]}&/@(First@raw)[[2,2]]]
 ];
-ImportExport`RegisterImport["InfluxDB",InfluxDB`ImportInfluxDB]
